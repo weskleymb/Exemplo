@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contato_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.senac.rn.view.ContatoVIEW">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/llConteudo">
+
+        <TextView
+            android:text="NOME"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNome" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/etNome"
+            android:maxLines="1" />
+
+        <TextView
+            android:text="FONE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFone" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/etFone"
+            android:maxLines="1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/llBotoes">
+
+            <Button
+                android:text="CADASTRAR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btCadastrar"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="LIMPAR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btLimpar"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvContatos" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
