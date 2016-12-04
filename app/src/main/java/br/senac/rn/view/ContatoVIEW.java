@@ -23,8 +23,8 @@ public class ContatoVIEW extends AppCompatActivity {
     private ContatoDAO dao = new ContatoDAO();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
         setContentView(R.layout.contato_view);
         inicializarComponentes();
         definirEventos();
@@ -52,7 +52,7 @@ public class ContatoVIEW extends AppCompatActivity {
         lvContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                display(adapter.getItem(position).getId());
+                mostrar(adapter.getItem(position).getId());
             }
         });
 
@@ -72,11 +72,12 @@ public class ContatoVIEW extends AppCompatActivity {
 
     }
 
-    private void display(int id) {
+    private void mostrar(int id) {
         Contato contato = dao.findById(id);
-        String texto = "Id:\t\t\t\t\t" + contato.getId() + "\n";
-        texto += "Nome:\t" + contato.getNome() + "\n";
-        texto += "Fone:\t\t" + contato.getFone();
+        String texto = "";
+        texto += "Id: " + contato.getId() + "\n";
+        texto += "Nome: " + contato.getNome() + "\n";
+        texto += "Fone: " + contato.getFone();
         new AlertDialog.Builder(this)
             .setIcon(R.mipmap.ic_launcher)
             .setTitle(contato.getNome())
