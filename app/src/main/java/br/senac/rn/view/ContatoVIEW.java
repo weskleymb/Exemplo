@@ -1,26 +1,25 @@
 package br.senac.rn.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import br.senac.rn.dao.ContatoDAO;
 import br.senac.rn.model.Contato;
 
-public class ContatoVIEW extends AppCompatActivity {
+public class ContatoVIEW extends Activity {
 
-    private TextView tvNome, tvFone;
     private EditText etNome, etFone;
     private Button btCadastrar, btLimpar;
     private ListView lvContatos;
     private ArrayAdapter<Contato> adapter;
-    private ContatoDAO dao = new ContatoDAO();
+    private ContatoDAO dao;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -32,8 +31,7 @@ public class ContatoVIEW extends AppCompatActivity {
 
     private void inicializarComponentes() {
 
-        tvNome = (TextView) findViewById(R.id.tvNome);
-        tvFone = (TextView) findViewById(R.id.tvFone);
+        dao = ContatoDAO.getInstance();
 
         etNome = (EditText) findViewById(R.id.etNome);
         etFone = (EditText) findViewById(R.id.etFone);
@@ -52,21 +50,23 @@ public class ContatoVIEW extends AppCompatActivity {
         lvContatos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                mostrar(adapter.getItem(position).getId());
+//              mostrar(adapter.getItem(position).getId());
+                Contato contato = adapter.getItem(position);
+                enviar(contato);
             }
         });
 
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cadastrar(view);
+                cadastrar();
             }
         });
 
         btLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                limpar(view);
+                limpar();
             }
         });
 
@@ -86,7 +86,7 @@ public class ContatoVIEW extends AppCompatActivity {
             .show();
     }
 
-    private void cadastrar(View view) {
+    private void cadastrar() {
         Contato contato = new Contato(
             dao.findAll().size()+1,
             etNome.getText().toString(),
@@ -94,13 +94,19 @@ public class ContatoVIEW extends AppCompatActivity {
         );
         dao.insert(contato);
         adapter.notifyDataSetChanged();
-        limpar(view);
+        limpar();
     }
 
-    private void limpar(View view) {
+    private void limpar() {
         etNome.setText("");
         etFone.setText("");
         etNome.requestFocus();
+    }
+
+    private void enviar(Contato contato) {
+        Intent intent = new Intent(ContatoVIEW.this, Teste.class);
+        intent.putExtra("contato", contato);
+        startActivity(intent);
     }
 
 }

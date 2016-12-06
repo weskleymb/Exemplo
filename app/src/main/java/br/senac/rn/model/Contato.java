@@ -1,6 +1,8 @@
 package br.senac.rn.model;
 
-public class Contato implements Comparable<Contato> {
+import java.io.Serializable;
+
+public class Contato implements Comparable<Contato>, Serializable {
 
     private int id;
     private String nome;
@@ -53,6 +55,6 @@ public class Contato implements Comparable<Contato> {
 
     @Override
     public String toString() {
-        return nome + "\n" + fone;
+        return nome;
     }
 }

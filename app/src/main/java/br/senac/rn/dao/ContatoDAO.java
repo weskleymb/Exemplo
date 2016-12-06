@@ -8,9 +8,17 @@ import br.senac.rn.model.Contato;
 public class ContatoDAO {
 
     private List<Contato> contatos;
+    private static ContatoDAO singleton;
 
     public ContatoDAO() {
         this.contatos = new ArrayList();
+    }
+
+    public static ContatoDAO getInstance() {
+        if (singleton == null) {
+            singleton = new ContatoDAO();
+        }
+        return singleton;
     }
 
     public void insert(Contato contato) {
